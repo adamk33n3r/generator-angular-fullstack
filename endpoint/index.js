@@ -79,6 +79,12 @@ Generator.prototype.createFiles = function createFiles() {
     dest = destBase + this.name;
   }
 
-  this.sourceRoot(path.join(__dirname, './templates'));
+  var templateBase = this.config.get('endpointTemplates');
+  if (templateBase) {
+    this.sourceRoot(path.join(process.cwd(), templateBase));
+  } else {
+    this.sourceRoot(path.join(__dirname, './templates'));
+  }
+
   ngUtil.processDirectory(this, '.', dest);
 };
